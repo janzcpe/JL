@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jansseen Limsiaco</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e8e5e1; /* Light, warm grey/beige background for the entire page */
+            color: #333333; /* Default dark grey text */
+            line-height: 1.6;
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
+            display: flex; /* Enable flexbox for two columns directly on body */
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            width: 100vw; /* Ensure it takes full viewport width */
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            /* Removed justify-content and align-items from body as it's now edge-to-edge */
+            /* Removed padding-top and padding-bottom for a truly edge-to-edge look */
+        }
+        /* Removed .resume-page-container */
+
+        .sidebar {
+            width: 35%; /* Left column width */
+            background-color: #333333; /* Dark grey background */
+            color: #ffffff; /* White text for sidebar */
+            padding: 2.5rem 1.5rem; /* Standard padding */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            /* No box-shadow or border-radius here, as it's part of the main document */
+        }
+        .main-content {
+            width: 65%; /* Right column width */
+            background-color: #f5f5f5; /* Lighter grey background for main content */
+            padding: 2.5rem; /* Standard padding */
+            /* No box-shadow or border-radius here */
+        }
+
+        .profile-picture {
+            width: 140px; /* Standard picture size */
+            height: 140px;
+            border-radius: 50%; /* Circular image */
+            object-fit: cover;
+            border: 4px solid #ffffff; /* White border around picture */
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3); /* Subtle outer glow */
+            margin-bottom: 2rem; /* Space below picture */
+        }
+
+        .name-title-area {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .name-title-area h1 {
+            font-size: 2.8rem; /* Standard name size */
+            font-weight: 700;
+            color: #222222; /* Very dark grey for name */
+            margin-bottom: 0.25rem;
+            text-align: left; /* Align name to left in main content */
+        }
+        .name-title-area p {
+            font-size: 1.2rem; /* Standard professional title size */
+            color: #666666; /* Medium grey for professional title */
+            font-weight: 400;
+            text-align: left; /* Align title to left */
+        }
+
+        .section-title {
+            font-size: 1.3rem; /* Standard section titles size */
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #cccccc; /* Light grey line under sections */
+            color: #444444; /* Darker grey for section titles */
+            text-transform: uppercase;
+            letter-spacing: 0.05em; /* Standard letter spacing */
+        }
+        .sidebar .section-title {
+            color: #ffffff;
+            border-bottom-color: #666666;
+            text-align: center;
+            width: 100%;
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem; /* Standard space */
+            width: 100%;
+        }
+        .contact-info li {
+            margin-bottom: 0.75rem; /* Standard space */
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem; /* Standard font size */
+        }
+        .contact-info li svg {
+            margin-right: 0.75rem; /* Standard space */
+            color: #f97316; /* Orange icon color */
+            flex-shrink: 0;
+            width: 20px; /* Standard icon size */
+            height: 20px;
+        }
+        .contact-info li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .contact-info li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Adjusted styles for sidebar-list to improve PDF alignment */
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem; /* Standard space */
+            width: 100%; /* Ensure it takes full width of its container */
+            text-align: left; /* Align the text content within the list items to the left */
+        }
+        .sidebar-list li {
+            margin-bottom: 0.75rem; /* Standard space */
+            display: flex; /* Use flex to control internal spacing */
+            flex-direction: column; /* Stack span elements vertically */
+            align-items: flex-start; /* Align content to the left within the flex item */
+            font-size: 0.95rem; /* Standard font size */
+            line-height: 1.3; /* Adjust line height for better spacing */
+        }
+        .sidebar-list li span {
+            display: block; /* Ensure each part is on its own line */
+            width: 100%; /* Ensure spans take full width */
+            text-align: left; /* Explicitly left-align text within spans */
+        }
+        .sidebar-list li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .sidebar-list li a:hover {
+            text-decoration: underline;
+        }
+
+
+        .main-content p {
+            margin-bottom: 1rem; /* Standard space */
+            font-size: 1.05rem; /* Standard text size */
+        }
+
+        .experience-item, .project-item {
+            margin-bottom: 1.5rem; /* Standard space between items */
+        }
+        .experience-item h3, .project-item h3 {
+            font-size: 1.15rem; /* Standard heading size */
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0.25rem; /* Standard space */
+        }
+        .experience-item p, .project-item p {
+            font-size: 0.95rem; /* Standard text size */
+            color: #666666;
+            margin-bottom: 0.5rem; /* Standard space */
+        }
+        .experience-item ul, .project-item ul {
+            list-style: disc;
+            padding-left: 1.5rem; /* Standard padding */
+            margin-top: 0.5rem; /* Standard space */
+            color: #444444;
+        }
+        .experience-item ul li, .project-item ul li {
+            margin-bottom: 0.4rem; /* Standard space */
+            font-size: 0.95rem; /* Standard text size */
+        }
+        .experience-item ul li strong, .project-item ul li strong {
+            color: #f97316; /* Orange for highlighted text in main content */
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem; /* Standard gap */
+            margin-top: 0.75rem; /* Standard space */
+            justify-content: center; /* Keep skills centered in sidebar */
+        }
+        .skill-item {
+            background-color: #e0e0e0;
+            color: #444444;
+            padding: 0.25rem 0.75rem; /* Standard padding */
+            border-radius: 0.3rem;
+            font-size: 0.85rem; /* Standard font size */
+            font-weight: 500;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack columns vertically */
+                min-height: auto; /* Allow height to adjust */
+                padding: 0; /* No padding on body for mobile */
+            }
+            .sidebar {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            .main-content {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            .profile-picture {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 1.5rem;
+            }
+            .name-title-area h1, .name-title-area p {
+                text-align: center;
+            }
+            .contact-info li, .sidebar-list li { /* Adjust for mobile */
+                justify-content: center; /* Keep centered for mobile */
+                text-align: center; /* Keep text centered for mobile */
+                align-items: center; /* Center items for mobile */
+            }
+            .sidebar-list li span { /* Adjust for mobile */
+                text-align: center;
+            }
+            .section-title {
+                margin-top: 1.5rem;
+                margin-bottom: 0.75rem;
+                font-size: 1.2rem;
+            }
+            .sidebar .section-title {
+                text-align: center;
+            }
+            /* Further reset font sizes and padding for mobile to avoid being too large */
+            .name-title-area h1 { font-size: 2rem; }
+            .name-title-area p { font-size: 0.9rem; }
+            .section-title { font-size: 1.1rem; }
+            .contact-info li, .sidebar-list li { font-size: 0.85rem; }
+            .contact-info li svg, .sidebar-list li svg { width: 18px; height: 18px; }
+            .main-content p { font-size: 0.9rem; }
+            .experience-item h3, .project-item h3 { font-size: 1rem; }
+            .experience-item p, .project-item p { font-size: 0.85rem; }
+            .experience-item ul li, .project-item ul li { font-size: 0.85rem; }
+            .skills-list { gap: 0.3rem; }
+            .skill-item { padding: 0.15rem 0.5rem; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <img src="G:/IMG_19645.jpg" alt="Your Profile Picture" class="profile-picture">
+
+        <h2 class="section-title">Contact</h2>
+        <ul class="contact-info">
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+                <span>(+63) 9606095779 </span>
+            </li>
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                <span>jansseen.limsiaco@gmail.com</span>
+            </li>
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+                <span>Metro Manila Philippines</span>
+            </li>
+        </ul>
+
+        <h2 class="section-title">Education</h2>
+        <ul class="sidebar-list">
+            <li>
+                <span class="font-semibold">Bachelor of Science</span>
+                <span>Computer Engineering(BSCpe)</span>
+                <span>University of St. La Salle Bacolod City</span>
+                <span class="date-range">2011</span>
+            </li>
+        </ul>
+
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-list">
+            <span class="skill-item">Javascript</span>
+            <span class="skill-item">Java</span>
+            <span class="skill-item">C#</span>
+            <span class="skill-item">ReactJS</span>
+            <span class="skill-item">NextJS</span>
+            <span class="skill-item">React Native</span>
+            <span class="skill-item">ExpressJS</span>
+            <span class="skill-item">NodeJS</span>
+            <span class="skill-item">VueJS</span>
+            <span class="skill-item">Svelte</span>
+            <span class="skill-item">Blazor</span>
+            <span class="skill-item">Tailwind</span>
+            <span class="skill-item">Typescript</span>
+            <span class="skill-item">Git</span>
+            <span class="skill-item">HTML</span>
+            <span class="skill-item">CSS</span>
+            <span class="skill-item">GraphQL</span>
+
+        </div>
+    </div>
+
+    <!-- Right Main Content -->
+    <div class="main-content">
+        <div class="name-title-area">
+            <h1>Jansseen Limsiaco</h1>
+            <p>Web Developer</p>
+        </div>
+
+        <h2 class="section-title">Profile</h2>
+        <p class="text-gray-700 mb-6">
+            Passionate Web Developer with 8+ years of experience building responsive, scalable, and user-friendly web applications. Proficient in modern web technologies and frameworks, with a strong focus on performance optimization and intuitive UI/UX design.        </p>
+
+        <h2 class="section-title">Work Experience</h2>
+        <div class="experience-item mb-6">
+            <h3>Computer Engineer</h3>
+            <p class="text-gray-600">Inphisa IT Programming Services | Pasay City <span class="date-range">September2016 – June2017</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Research all about technologies that is used in web development</li>
+                <li>Write codes using different kind of programming languages like Python, Javascript (Nodejs), Java </li>
+                <li>Create a web service that involves Blockchain Technology</li>
+
+            </ul>
+        </div>
+        <div class="experience-item mb-6">
+            <h3>Mobile Developer</h3>
+            <p class="text-gray-600">Global Pinoy Remittance and Services |  Quezon City <span class="date-range">October2017 – May2018</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Maintain and Develop Web and Mobile Applications using React native, NodeJS, Java, PHP library and frameworks</li>
+
+            </ul>
+        </div>
+        <div class="experience-item mb-6">
+            <h3>Senior Web Developer</h3>
+            <p class="text-gray-600">Ascendant Technologies Inc.  |  Alabang City <span class="date-range">May2018 – July2019</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Maintain and Develop Applications using React-native for mobile and
+                    Laravel framework for Web
+                </li>
+            </ul>
+        </div>
+        <div class="experience-item mb-6">
+            <h3>Consultant</h3>
+            <p class="text-gray-600">Ecashpay Asia Inc. |  Quezon City <span class="date-range">July2019 – Feb2020</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Create Android/IOS applications using React Native</li>
+            </ul>
+        </div>
+        <div class="experience-item mb-6">
+            <h3>Frontend Developer</h3>
+            <p class="text-gray-600">Vigos Ventures Inc |  Makati City <span class="date-range">March2020 – August2020</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Develop a scalable, high-performance web app using React and TypeScript</li>
+                <li>Develop Web application for healthcare</li>
+
+            </ul>
+        </div>
+
+        <div class="experience-item mb-6">
+            <h3>Mid ReactJS Developer</h3>
+            <p class="text-gray-600">FlexisourceIT, Makati City | <span class="date-range">August2020 - January2022</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Develop and Maintain Web Application for trading application</li>
+                <li>Translate UI Design</li>
+                <li>Designed and implemented an interactive dashboard for data visualization </li>
+                <li>Redesign legacy code into modern web technologies and frameworks</li>
+            </ul>
+        </div>
+        <div class="experience-item mb-6">
+            <h3>Engineer</h3>
+            <p class="text-gray-600">Samsung (SRPH) , Taguig City | <span class="date-range">January2022 – October2022</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Handles Frontend task for different projects using ReactJS and VueJS</li>
+                <li>Update Different Application build from JQuery to SPA</li>
+                <li>Fixing Bug and adding Features</li>
+            </ul>
+        </div>
+        <div class="experience-item mb-6">
+            <h3>Senior Frontend Developer</h3>
+            <p class="text-gray-600">FCI Technologies/JMJ , Alabang City | <span class="date-range">October2022 – present</span></p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Handles Frontend task for Sportsbook application using Reactjs, Svelte and Blazor</li>
+                <li>Wrote clean, maintainable code and optimized page load speed</li>
+                <li>Building Unit Test</li>
+            </ul>
+        </div>
+
+        <!--<h2 class="section-title">Projects</h2>
+        <div class="project-item mb-6">
+            <h3><a href="[Link to Project: Live Demo / GitHub Repo / Behance / Dribbble]" target="_blank" class="text-orange-500 hover:underline">Redesign of "Local Cafe" Website</a></h3>
+            <p class="text-gray-600">A personal project focused on improving the online presence and user experience for a local coffee shop.</p>
+            <p class="text-gray-700 mt-1">
+                <strong class="font-medium">Role:</strong> Lead UI/UX Designer & Front-End Developer <br>
+                <strong class="font-medium">Technologies/Tools Used:</strong> Figma, React, Tailwind CSS, JavaScript, Git
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Conducted <strong class="text-orange-600">user interviews and competitive analysis</strong> to identify pain points and opportunities for improvement.</li>
+                <li>Designed <strong class="text-orange-600">responsive high-fidelity mockups and interactive prototypes</strong> in Figma, focusing on intuitive navigation and visual appeal.</li>
+            </ul>
+        </div>
+
+        <div class="project-item mb-6">
+            <h3><a href="[Link to Project]" target="_blank" class="text-orange-500 hover:underline">Open-Source Icon Library Contribution</a></h3>
+            <p class="text-gray-600">Contributed to an open-source project by designing and optimizing SVG icons for web use.</p>
+            <p class="text-gray-700 mt-1">
+                <strong class="font-medium">Role:</strong> Graphic Designer & SVG Optimizer <br>
+                <strong class="font-medium">Technologies/Tools Used:</strong> Adobe Illustrator, SVG, Git
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+                <li>Designed <strong class="text-orange-600">20+ new vector icons</strong> adhering to the project's style guide and accessibility standards.</li>
+                <li>Optimized SVG files for web performance, reducing file sizes by an average of 30% without loss of quality.</li>
+            </ul>
+        </div>
+        -->
+    </div>
+</body>
+</html>
